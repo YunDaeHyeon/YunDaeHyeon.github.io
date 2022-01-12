@@ -1,13 +1,13 @@
-- title: 메인
+- title: home
   url: /
   external: false
 
-- title: 포스팅
-  url: /post/
+- title: archive
+  url: /archive/
   external: false
 
-- title: 정보
-  url: /info/
+- title: about
+  url: /about/
   external: false # set true if you using external link, see below
 
 # Example:
