@@ -4,7 +4,7 @@ description: >- # site description
   열심히 살아가고 싶은 대현의 공간
 lang: ko-KR # default lang
 timezone: Asia/Korea # set your timezone
-image: assets/img/avatar.jpg # This image used for Open Graph more info https://ogp.me/
+image: /assets/img/avatar.jpg # This image used for Open Graph more info https://ogp.me/
 repo: https://github.com/YunDaeHyeon # site repo [optional]
 mode: dark # default theme "dark" | "light"
 
