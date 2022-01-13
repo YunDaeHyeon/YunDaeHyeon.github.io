@@ -1,0 +1,558 @@
+#include <windows.h>
+#include <cmath>//각을 구할때 필요한 헤더
+#include "resource.h"
+//#include <mmsystem.h>//사운드를 넣을때 필요한 헤더
+//#include <commctrl.h>//공통 컨트롤을 위한(프로그래스 바) 헤더
+//#pragma comment(lib."winmm.lib")//멀티미디어 함수를 사용하기 위한 lib파일
+
+int ax = 0;
+int ay = 0;
+int bx = 0;
+int by = 0;
+int cx = 0;
+int cy = 0;
+int dx = 0;
+int dy = 0;
+int Windowch1 = 2;
+int Windowch2 = 0;
+int Windowch3 = 0;
+int Windowch4 = 0;
+//int bWindow1 = 1;
+//int bWindow2 = 0;
+
+LRESULT CALLBACK WndProc(HWND,UINT,WPARAM,LPARAM);
+LRESULT CALLBACK WndProc2(HWND,UINT,WPARAM,LPARAM);
+LRESULT CALLBACK WndProc3(HWND,UINT,WPARAM,LPARAM);
+LRESULT CALLBACK WndProc4(HWND,UINT,WPARAM,LPARAM);
+
+HINSTANCE g_hInst1,g_hInst2,g_hInst3,g_hInst4;
+
+LPCTSTR lpszClass=TEXT("Window1");
+LPCTSTR lpszClass2=TEXT("Window2");
+LPCTSTR lpszClass3=TEXT("Window3");
+LPCTSTR lpszClass4=TEXT("Window4");
+
+HDC hdc,hdc2,hdc3,hdc4;
+HWND hWnd, hWnd2, hWnd3, hWnd4; 
+HWND hWndMain;
+//비트맵 리소스 핸들(배경 및 아이콘)
+HBITMAP background[100];
+//비트맵 이미지의 필요 없는 배경을 없애 주는 함수
+void TransBlt(HDC hdc, int x, int y, HBITMAP hbitmap, COLORREF clrMask);
+//비트맵을 윈도우상에 그려주는 함수
+void DrawBitmap(HDC hdc);
+void DrawBitmap2(HDC hdc2);
+void DrawBitmap3(HDC hdc3);
+void DrawBitmap4(HDC hdc4);
+
+//윈도우메인 부분
+int APIENTRY WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpszCmdParam,int nCmdShow)
+{
+	MSG Message1, Message2, Message3, Message4;  //메시지 구조체
+	WNDCLASS WndClass, WndClass2, WndClass3, WndClass4; //윈도우 클래스 구조체
+	g_hInst1=hInstance;
+
+	//윈도우 1
+	WndClass.cbClsExtra=0;
+	WndClass.cbWndExtra=0;
+	WndClass.hbrBackground=(HBRUSH)(COLOR_WINDOW+1);
+	WndClass.hCursor=LoadCursor(NULL,IDC_ARROW);
+	WndClass.hIcon=LoadIcon(NULL,IDI_APPLICATION);
+	WndClass.hInstance=hInstance;
+	WndClass.lpfnWndProc=WndProc;
+	WndClass.lpszClassName=lpszClass;
+	WndClass.lpszMenuName=NULL;
+	WndClass.style=CS_HREDRAW|CS_VREDRAW;
+	RegisterClass(&WndClass);
+	//윈도우 2
+	WndClass2.cbClsExtra=0;  
+	WndClass2.cbWndExtra=0;  
+	WndClass2.hbrBackground=(HBRUSH)GetStockObject(WHITE_BRUSH);
+	WndClass2.hCursor=LoadCursor(NULL,IDC_ARROW);  
+	WndClass2.hIcon=LoadIcon(NULL,IDI_APPLICATION);
+	WndClass2.hInstance=hInstance; 
+	WndClass2.lpfnWndProc=WndProc2;
+	WndClass2.lpszClassName=lpszClass2; 
+	WndClass2.lpszMenuName=NULL; 
+	WndClass2.style=CS_HREDRAW | CS_VREDRAW;
+	RegisterClass(&WndClass2); 
+	//윈도우 3
+	WndClass3.cbClsExtra=0;   
+	WndClass3.cbWndExtra=0;  
+	WndClass3.hbrBackground=(HBRUSH)GetStockObject(WHITE_BRUSH); 
+	WndClass3.hCursor=LoadCursor(NULL,IDC_ARROW); 
+	WndClass3.hIcon=LoadIcon(NULL,IDI_APPLICATION); 
+	WndClass3.hInstance=hInstance; 
+	WndClass3.lpfnWndProc=WndProc3;
+	WndClass3.lpszClassName=lpszClass3;
+	WndClass3.lpszMenuName=NULL; 
+	WndClass3.style=CS_HREDRAW | CS_VREDRAW;
+	RegisterClass(&WndClass3); 
+	//윈도우 4
+	WndClass4.cbClsExtra=0;   
+	WndClass4.cbWndExtra=0;  
+	WndClass4.hbrBackground=(HBRUSH)GetStockObject(WHITE_BRUSH); 
+	WndClass4.hCursor=LoadCursor(NULL,IDC_ARROW);  
+	WndClass4.hIcon=LoadIcon(NULL,IDI_APPLICATION);   
+	WndClass4.hInstance=hInstance; 
+	WndClass4.lpfnWndProc=WndProc4; 
+	WndClass4.lpszClassName=lpszClass4;
+	WndClass4.lpszMenuName=NULL; 
+	WndClass4.style=CS_HREDRAW | CS_VREDRAW;
+	RegisterClass(&WndClass4);
+
+	//윈도우 1 생성
+	hWnd=CreateWindow(lpszClass,  //윈도우 클래스 이름
+   lpszClass,  //타이틀바에 출력될문자열
+   WS_OVERLAPPEDWINDOW, //윈도우 스타일
+   0,  //윈도우 좌상x좌표
+   0,  //윈도우 좌상y좌표
+   500,  //윈도우 폭
+   500,  //윈도우 높이
+   NULL,   //부모 윈도우 핸들
+   (HMENU)NULL,  //메뉴 혹은 자식 윈도우의 식별자
+   hInstance,  //윈도우를 생성한 인스턴스 핸들 
+   NULL    //CREATESTRUCT 구조체를 통해 전달되는 값
+   );
+	//윈도우 2 생성
+	hWnd2=CreateWindow(lpszClass2,
+   lpszClass2,
+   WS_OVERLAPPEDWINDOW,
+   510, 
+   0, 
+   500,
+   500,
+   NULL,  
+   (HMENU)NULL,  
+   hInstance, 
+   NULL  
+   );
+	//윈도우 3 생성
+	hWnd3=CreateWindow(lpszClass3,
+   lpszClass3,
+   WS_OVERLAPPEDWINDOW,
+   0, 
+   510, 
+   500,
+   500,
+   NULL,  
+   (HMENU)NULL,  
+   hInstance, 
+   NULL  
+   );
+
+	//윈도우 4 생성
+	hWnd4=CreateWindow(lpszClass4,
+   lpszClass4,
+   WS_OVERLAPPEDWINDOW,
+   510, 
+   510, 
+   500,
+   500,
+   NULL,  
+   (HMENU)NULL,  
+   hInstance, 
+   NULL  
+   );
+
+	if(!hWnd) return(FALSE);  //윈도우 생성실패시 종료
+	if(!hWnd2) return(FALSE); 
+	if(!hWnd3) return(FALSE); 
+	if(!hWnd4) return(FALSE); 
+	ShowWindow(hWnd,nCmdShow);  //윈도우 화면에 나타내기
+	ShowWindow(hWnd2,nCmdShow);
+	ShowWindow(hWnd3,nCmdShow); 
+	ShowWindow(hWnd4,nCmdShow);
+
+	while(GetMessage(&Message1,0,0,0)) {
+	TranslateMessage(&Message1); //키보드 메시지번역
+	DispatchMessage(&Message1); //메시지를 해당프로시저로 보낸다
+	}
+	return Message1.wParam;
+
+	while(GetMessage(&Message2,0,0,0)) {
+	 TranslateMessage(&Message2);
+	 DispatchMessage(&Message2); 
+	}
+	 return Message2.wParam;
+
+	 while(GetMessage(&Message3,0,0,0)) {
+	TranslateMessage(&Message3);
+	DispatchMessage(&Message3); 
+	}
+	 return Message3.wParam;
+
+	while(GetMessage(&Message4,0,0,0)) {
+	 TranslateMessage(&Message4);
+	 DispatchMessage(&Message4); 
+	}
+	 return Message4.wParam;
+}
+// 윈도우 메시지 처리
+LRESULT CALLBACK WndProc(HWND hWnd,UINT iMessage,WPARAM wParam,LPARAM lParam)
+{
+	HDC hdc;
+	PAINTSTRUCT ps;
+	RECT crt;
+
+	switch (iMessage){
+		case WM_CREATE:
+			hWndMain=hWnd;
+			SetRect(&crt,0,0,500,500);
+			AdjustWindowRect(&crt,WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX,FALSE);
+			SetWindowPos(hWnd,NULL,0,0,crt.right-crt.left,crt.bottom-crt.top,SWP_NOMOVE|SWP_NOZORDER);
+			//비트맵 리소스들을 Backgroud[]배열에 등록
+			background[1]=LoadBitmap(g_hInst1,MAKEINTRESOURCE(IDB_BITMAP1));//1
+			background[2]=LoadBitmap(g_hInst1,MAKEINTRESOURCE(IDB_BITMAP2));//윈도우 1캐릭터
+			background[3]=LoadBitmap(g_hInst1,MAKEINTRESOURCE(IDB_BITMAP2));//윈도우 2캐릭터
+			background[4]=LoadBitmap(g_hInst1,MAKEINTRESOURCE(IDB_BITMAP2));//윈도우 3캐릭터
+			background[5]=LoadBitmap(g_hInst1,MAKEINTRESOURCE(IDB_BITMAP2));//윈도우 4캐릭터
+			//SetTimer(hWnd,1,50,NULL);
+			//배경음 지정.
+			//Playsound(TEXT("my.wav"),NULL,SND_ASYNC);
+			return 0;
+
+		//case WM_SETFOCUS:
+			
+		//	return 0;
+
+		case WM_KEYDOWN:
+			switch(wParam){
+		case VK_LEFT:
+			ax=ax-10;
+			break;
+		case VK_RIGHT:
+			ax=ax+10;
+			if(ax==500){
+				Windowch1 = 0;
+				Windowch2 = 3;
+				by = ay;
+			SetFocus(hWnd2);
+			InvalidateRect(hWnd2,NULL,FALSE);
+			}
+			break;
+		case VK_UP:
+			ay=ay-10;
+			break;
+		case VK_DOWN:
+			ay=ay+10;
+			if(ay==500){
+				Windowch1 = 0;
+				Windowch3 = 4;
+				cx = ax;
+				SetFocus(hWnd3);
+				InvalidateRect(hWnd3,NULL,FALSE);
+			}
+			break;
+			}
+			InvalidateRect(hWnd,NULL,FALSE);
+			return 0;
+
+		case WM_PAINT:
+			hdc=BeginPaint(hWnd,&ps);
+			DrawBitmap(hdc);
+			EndPaint(hWnd, &ps);
+			return 0;
+		case WM_DESTROY:
+			PostQuitMessage(0);
+			return 0;
+	}
+	return(DefWindowProc(hWnd,iMessage,wParam,lParam));
+}
+
+LRESULT CALLBACK WndProc2(HWND hWnd2,UINT iMessage,WPARAM wParam,LPARAM lParam)
+{
+ PAINTSTRUCT ps;
+ switch(iMessage) {
+
+  case WM_KEYDOWN:
+			switch(wParam){
+		case VK_LEFT:
+			bx=bx-10;
+			if(bx==-50){
+				Windowch1 = 2;
+				Windowch2 = 0;
+				ay = by;
+			SetFocus(hWnd);
+			InvalidateRect(hWnd,NULL,FALSE);
+			}
+			break;
+		case VK_RIGHT:
+			bx=bx+10;
+			break;
+		case VK_UP:
+			by=by-10;
+			break;
+		case VK_DOWN:
+			by=by+10;
+			if(by==500){
+				Windowch2 = 0;
+				Windowch4 = 5;
+				dx = bx;
+				SetFocus(hWnd4);
+			InvalidateRect(hWnd4,NULL,FALSE);
+			}
+			break;
+			}
+			InvalidateRect(hWnd2,NULL,FALSE);
+			return 0;
+
+			case WM_PAINT:
+				 hdc2=BeginPaint(hWnd2,&ps);
+				DrawBitmap2(hdc2);
+				EndPaint(hWnd2,&ps);
+			 return 0;
+		 case WM_DESTROY:
+			 PostQuitMessage(0);
+		return 0;
+ }
+ return(DefWindowProc(hWnd2,iMessage,wParam,lParam));
+} 
+
+LRESULT CALLBACK WndProc3(HWND hWnd3,UINT iMessage,WPARAM wParam,LPARAM lParam)
+{
+ PAINTSTRUCT ps;
+ switch(iMessage) {
+
+  case WM_KEYDOWN:
+			switch(wParam){
+		case VK_LEFT:
+			cx=cx-10;
+			break;
+		case VK_RIGHT:
+			cx=cx+10;
+			if(cx==500){
+				Windowch3 = 0;
+				Windowch4 = 5;
+				dy = cy;
+				SetFocus(hWnd4);
+				InvalidateRect(hWnd4,NULL,FALSE);
+			}
+			break;
+		case VK_UP:
+			cy=cy-10;
+			if(cy==-50){
+				Windowch3 = 0;
+				Windowch1 = 2;
+				ax = cx;
+				SetFocus(hWnd);
+				InvalidateRect(hWnd,NULL,FALSE);
+			}
+			break;
+		case VK_DOWN:
+			cy=cy+10;
+			break;
+			}
+			InvalidateRect(hWnd3,NULL,FALSE);
+			return 0;
+
+			case WM_PAINT:
+				 hdc3=BeginPaint(hWnd3,&ps);
+				DrawBitmap3(hdc3);
+				EndPaint(hWnd3,&ps);
+			 return 0;
+		 case WM_DESTROY:
+			 PostQuitMessage(0);
+		return 0;
+ }
+ return(DefWindowProc(hWnd3,iMessage,wParam,lParam));
+} 
+
+LRESULT CALLBACK WndProc4(HWND hWnd4,UINT iMessage,WPARAM wParam,LPARAM lParam)
+{
+ PAINTSTRUCT ps;
+ switch(iMessage) {
+
+  case WM_KEYDOWN:
+			switch(wParam){
+		case VK_LEFT:
+			dx=dx-10;
+			if(dx==-50){
+				Windowch4 = 0;
+				Windowch3 = 4;
+				cy = dy;
+				SetFocus(hWnd3);
+				InvalidateRect(hWnd3,NULL,FALSE);
+			}
+			break;
+		case VK_RIGHT:
+			dx=dx+10;
+			break;
+		case VK_UP:
+			dy=dy-10;
+			if(dy==-50){
+				Windowch4 = 0;
+				Windowch2 = 3;
+				bx = dx;
+				SetFocus(hWnd2);
+				InvalidateRect(hWnd2,NULL,FALSE);
+			}
+			break;
+		case VK_DOWN:
+			dy=dy+10;
+			break;
+			}
+			InvalidateRect(hWnd4,NULL,FALSE);
+			return 0;
+
+			case WM_PAINT:
+				 hdc4=BeginPaint(hWnd4,&ps);
+				DrawBitmap4(hdc4);
+				EndPaint(hWnd4,&ps);
+			 return 0;
+		 case WM_DESTROY:
+			 PostQuitMessage(0);
+		return 0;
+ }
+ return(DefWindowProc(hWnd4,iMessage,wParam,lParam));
+} 
+
+void DrawBitmap(HDC hdc)
+{
+	//실제 비트멥 이미지를 가질 DC핸들과 가상의 DC핸들 변수선언
+	HDC hMemDC, hMemDC2;
+	HBITMAP hOldBitmap, hBackBit;
+	//실제 비트멥 이미지를 가질 DC핸들 지정
+	hMemDC=CreateCompatibleDC(hdc);
+	hBackBit=CreateCompatibleBitmap(hdc,500,500);
+	hOldBitmap=(HBITMAP)SelectObject(hMemDC,hBackBit);
+	//임시 비트맵 이미지를 가질 가상 DC핸들 지정
+		hMemDC2=CreateCompatibleDC(hdc);
+                //배경을 선택
+		SelectObject(hMemDC2,background[1]);
+		//가상의 hMemDC2를 실제 hMemDC에 복사
+		BitBlt(hMemDC,0,0,600,500,hMemDC2,0,0,SRCCOPY);
+		DeleteDC(hMemDC2);
+
+		//투명색으로 빨간색으로 지정 후 hMemDC에 복사
+
+		TransBlt(hMemDC,ax,ay,background[Windowch1],RGB(255,255,255));
+		//실제의 이미지를 그린다
+		BitBlt(hdc,0,0,500,500,hMemDC,0,0,SRCCOPY);
+		SelectObject(hMemDC,hOldBitmap);
+		DeleteObject(hBackBit);
+		DeleteDC(hMemDC);
+}
+
+void DrawBitmap2(HDC hdc2)
+{
+	HDC hMemDC, hMemDC2;
+	HBITMAP hOldBitmap, hBackBit;
+
+	hMemDC=CreateCompatibleDC(hdc2);
+	hBackBit=CreateCompatibleBitmap(hdc2,500,500);
+	hOldBitmap=(HBITMAP)SelectObject(hMemDC,hBackBit);
+
+		hMemDC2=CreateCompatibleDC(hdc2);
+
+		SelectObject(hMemDC2,background[1]);
+
+		BitBlt(hMemDC,0,0,500,500,hMemDC2,0,0,SRCCOPY);
+		DeleteDC(hMemDC2);
+
+		TransBlt(hMemDC,bx,by,background[Windowch2],RGB(255,255,255));
+
+		BitBlt(hdc2,0,0,500,500,hMemDC,0,0,SRCCOPY);
+		SelectObject(hMemDC,hOldBitmap);
+		DeleteObject(hBackBit);
+		DeleteDC(hMemDC);
+}
+
+void DrawBitmap3(HDC hdc3)
+{
+	HDC hMemDC, hMemDC2;
+	HBITMAP hOldBitmap, hBackBit;
+
+	hMemDC=CreateCompatibleDC(hdc3);
+	hBackBit=CreateCompatibleBitmap(hdc3,500,500);
+	hOldBitmap=(HBITMAP)SelectObject(hMemDC,hBackBit);
+
+		hMemDC2=CreateCompatibleDC(hdc3);
+
+		SelectObject(hMemDC2,background[1]);
+
+		BitBlt(hMemDC,0,0,500,500,hMemDC2,0,0,SRCCOPY);
+		DeleteDC(hMemDC2);
+
+		TransBlt(hMemDC,cx,cy,background[Windowch3],RGB(255,255,255));
+
+		BitBlt(hdc3,0,0,500,500,hMemDC,0,0,SRCCOPY);
+		SelectObject(hMemDC,hOldBitmap);
+		DeleteObject(hBackBit);
+		DeleteDC(hMemDC);
+}
+
+void DrawBitmap4(HDC hdc4)
+{
+	HDC hMemDC, hMemDC2;
+	HBITMAP hOldBitmap, hBackBit;
+
+	hMemDC=CreateCompatibleDC(hdc4);
+	hBackBit=CreateCompatibleBitmap(hdc4,500,500);
+	hOldBitmap=(HBITMAP)SelectObject(hMemDC,hBackBit);
+
+		hMemDC2=CreateCompatibleDC(hdc4);
+
+		SelectObject(hMemDC2,background[1]);
+
+		BitBlt(hMemDC,0,0,500,500,hMemDC2,0,0,SRCCOPY);
+		DeleteDC(hMemDC2);
+
+		TransBlt(hMemDC,dx,dy,background[Windowch4],RGB(255,255,255));
+
+		BitBlt(hdc4,0,0,500,500,hMemDC,0,0,SRCCOPY);
+		SelectObject(hMemDC,hOldBitmap);
+		DeleteObject(hBackBit);
+		DeleteDC(hMemDC);
+}
+
+void TransBlt(HDC hdc, int x, int y, HBITMAP hbitmap, COLORREF clrMask)
+
+{
+	BITMAP bm;
+	COLORREF cColor;
+	HBITMAP bmAndBack, bmAndObject, bmAndMem, bmSave;
+	HBITMAP bmBackOld, bmObjectOld, bmMemOld, bmSaveOld;
+	HDC hdcMem, hdcBack, hdcObject, hdcTemp, hdcSave;
+	POINT	ptSize;
+	hdcTemp = CreateCompatibleDC(hdc);
+	SelectObject(hdcTemp, hbitmap);
+	GetObject(hbitmap, sizeof(BITMAP), (LPSTR)&bm);
+	ptSize.x = bm.bmWidth;
+	ptSize.y = bm.bmHeight;
+	DPtoLP(hdcTemp, &ptSize,1);
+	hdcBack   = CreateCompatibleDC(hdc);
+	hdcObject = CreateCompatibleDC(hdc);
+	hdcMem    = CreateCompatibleDC(hdc);
+	hdcSave   = CreateCompatibleDC(hdc);
+	bmAndBack   = CreateBitmap(ptSize.x, ptSize.y, 1, 1, NULL);
+	bmAndObject = CreateBitmap(ptSize.x, ptSize.y, 1, 1, NULL);
+	bmAndMem    = CreateCompatibleBitmap(hdc, ptSize.x, ptSize.y);
+	bmSave      = CreateCompatibleBitmap(hdc, ptSize.x, ptSize.y);
+	bmBackOld   = (HBITMAP) SelectObject(hdcBack, bmAndBack);
+	bmObjectOld = (HBITMAP) SelectObject(hdcObject, bmAndObject);
+	bmMemOld    = (HBITMAP) SelectObject(hdcMem, bmAndMem);
+	bmSaveOld   = (HBITMAP) SelectObject(hdcSave, bmSave);
+	SetMapMode(hdcTemp, GetMapMode(hdc));
+	BitBlt(hdcSave, 0, 0, ptSize.x, ptSize.y, hdcTemp, 0, 0, SRCCOPY);
+	cColor = SetBkColor(hdcTemp, clrMask);
+	BitBlt(hdcObject, 0, 0, ptSize.x, ptSize.y, hdcTemp, 0, 0, SRCCOPY);
+	SetBkColor(hdcTemp, cColor);
+	BitBlt(hdcBack, 0, 0, ptSize.x, ptSize.y, hdcObject, 0, 0, NOTSRCCOPY);
+	BitBlt(hdcMem , 0, 0, ptSize.x, ptSize.y, hdc      , x, y, SRCCOPY);
+	BitBlt(hdcMem , 0, 0, ptSize.x, ptSize.y, hdcObject, 0, 0, SRCAND);
+	BitBlt(hdcTemp, 0, 0, ptSize.x, ptSize.y, hdcBack  , 0, 0, SRCAND);
+	BitBlt(hdcMem , 0, 0, ptSize.x, ptSize.y, hdcTemp  , 0, 0, SRCPAINT);
+	BitBlt(hdc    , x, y, ptSize.x, ptSize.y, hdcMem   , 0, 0, SRCCOPY);
+	BitBlt(hdcTemp, 0, 0, ptSize.x, ptSize.y, hdcSave  , 0, 0, SRCCOPY);
+	DeleteObject(SelectObject(hdcBack, bmBackOld));
+	DeleteObject(SelectObject(hdcObject, bmObjectOld));
+	DeleteObject(SelectObject(hdcMem, bmMemOld));
+	DeleteObject(SelectObject(hdcSave, bmSaveOld));
+
+	DeleteDC(hdcMem);
+	DeleteDC(hdcBack);
+	DeleteDC(hdcObject);
+	DeleteDC(hdcSave);
+	DeleteDC(hdcTemp);
+}

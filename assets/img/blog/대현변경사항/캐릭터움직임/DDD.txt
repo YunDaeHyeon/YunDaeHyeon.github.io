@@ -1,0 +1,349 @@
+#include <windows.h>
+//#include <cmath>//각을 구할때 필요한 헤더
+#include "resource.h"
+//#include <mmsystem.h>//사운드를 넣을때 필요한 헤더
+//#include <commctrl.h>//공통 컨트롤을 위한(프로그래스 바) 헤더
+//#pragma comment(lib."winmm.lib")//멀티미디어 함수를 사용하기 위한 lib파일
+
+LRESULT CALLBACK WndProc(HWND,UINT,WPARAM,LPARAM);
+HINSTANCE g_hInst;//인스턴스 핸들
+LPCTSTR lpszClass=TEXT("Fortress");
+HWND hWndMain;
+int x=0,xx=0,w;
+static int ch=2;
+int cha=6;
+int chb=15;
+int chc=20;
+int chd=28;
+int SLIME=12;
+int chx=750;
+static int aHP=21;
+int sX=200;
+int minusHP=0;
+static int MHP=285;
+//비트맵 리소스 핸들(배경 및 아이콘)
+HBITMAP background[50];
+
+//비트맵 이미지의 필요 없는 배경을 없애 주는 함수
+void TransBlt(HDC hdc, int x, int y, HBITMAP hbitmap, COLORREF clrMask);
+
+//비트맵을 윈도우상에 그려주는 함수
+void DrawBitmap(HDC hdc);
+
+//윈도우메인 부분
+int APIENTRY WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance
+					 ,LPSTR lpszCmdParam,int nCmdShow)
+{
+	HWND hWnd;
+	MSG Message;
+	WNDCLASS WndClass;
+	g_hInst=hInstance;
+
+	//윈도우 클래스 등록
+		WndClass.cbClsExtra=0;
+	WndClass.cbWndExtra=0;
+	WndClass.hbrBackground=(HBRUSH)(COLOR_WINDOW+1);
+	WndClass.hCursor=LoadCursor(NULL,IDC_ARROW);
+	WndClass.hIcon=LoadIcon(NULL,IDI_APPLICATION);
+	WndClass.hInstance=hInstance;
+	WndClass.lpfnWndProc=WndProc;
+	WndClass.lpszClassName=lpszClass;
+	//메뉴 등록 부분
+	WndClass.lpszMenuName=MAKEINTRESOURCE(IDR_MENU1);
+	WndClass.style=CS_HREDRAW|CS_VREDRAW;
+	RegisterClass(&WndClass);
+
+	//윈도우 생성
+	hWnd=CreateWindow(lpszClass,lpszClass,WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT,CW_USEDEFAULT,CW_USEDEFAULT,CW_USEDEFAULT,
+		NULL,(HMENU)NULL,hInstance,NULL);
+	ShowWindow(hWnd, nCmdShow);
+
+	//UpdateWindow(hWnd);
+
+	/*인삿말
+	MessageBox(hWnd, TEXT("안녕하세요.\n혜광 컴퓨터 학원입니다."), TEXT("WELCOME TO
+	FORTRESS WORLD!"), MB_OK);
+	*/
+
+	//메시지 루프
+	while (GetMessage(&Message,NULL,0,0)){
+		TranslateMessage(&Message);
+		DispatchMessage(&Message);
+	}
+
+	return (int)Message.wParam;
+}
+
+// 윈도우 메시지 처리
+LRESULT CALLBACK WndProc(HWND hWnd,UINT iMessage,WPARAM wParam,LPARAM lParam)
+{
+	HDC hdc;
+	PAINTSTRUCT ps;
+	RECT crt;
+
+	switch (iMessage){
+		case WM_CREATE:
+			hWndMain=hWnd;
+			SetRect(&crt,0,0,1000,480);
+			AdjustWindowRect(&crt,WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX,FALSE);
+
+			SetWindowPos(hWnd,NULL,0,0,crt.right-crt.left,crt.bottom-crt.top,SWP_NOMOVE|SWP_NOZORDER);
+
+			//비트맵 리소스들을 Backgroud[]배열에 등록
+			background[1]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAP1));//배경 리소스
+			background[2]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAP2));//캐릭터1
+			background[3]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAP3));//캐릭터1-2
+			background[4]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAP4));//캐릭터1-3
+			background[5]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAP5));//캐릭터1-4			
+			background[6]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAPWITHE));//공백1
+			background[7]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAP6));//캐릭터공격1
+			background[8]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAP7));//캐릭터공격1-2
+			background[9]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAP8));//캐릭터공격1-3
+			background[10]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAP9));//캐릭터공격1-4
+			background[12]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAPSLIME1));//슬라임1
+			background[13]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAPSLIME2));//슬라임2
+			background[14]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAPSLIME3));//슬라임3
+			background[15]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAPWITHE1));//공백2
+			background[16]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAP10));//캐릭터공격2
+			background[17]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAP11));//캐릭터공격2-1
+			background[18]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAP12));//캐릭터공격2-2
+			background[19]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAP13));//캐릭터공격2-3
+			background[20]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAPWITHE2));//공백3
+			background[21]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAPHP100));//몬스터 체력 100
+			background[22]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAPHP80));//몬스터 체력 80
+			background[23]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAPHP60));//몬스터 체력 60
+			background[24]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAPHP40));//몬스터 체력 40
+			background[25]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAPHP20));//몬스터 체력 20
+			background[26]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAPHP0));//몬스터 체력 0
+			background[27]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAPHPM20));//몬스터 체력 -20깎임
+			background[28]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAPWITHE3));//공백4
+			background[29]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAP15));//캐릭터 움직임2
+			background[30]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAP16));//캐릭터 움직임2-1
+			background[31]=LoadBitmap(g_hInst,MAKEINTRESOURCE(IDB_BITMAP17));//캐릭터 움직임2-2
+			SetTimer(hWnd,1,100,NULL);
+			SetTimer(hWnd,4,500,NULL);
+			SetTimer(hWnd,2,500,NULL);
+
+			//배경음 지정.
+			//Playsound(TEXT("my.wav"),NULL,SND_ASYNC);
+
+			return 0;
+		case WM_TIMER:
+			switch(wParam){
+			//	case 1:
+				//	x--;
+				//	if (x<0) x=1000;
+				//	break;
+				case 2:
+					ch=2;
+					ch++;
+					if(ch>5) ch=2;
+					break;
+				case 3:
+					ch=6;
+					cha=cha+1;
+					if(cha>10) {
+						cha=6;
+						ch=2;
+						SetTimer(hWnd,2,500,NULL);
+						KillTimer(hWnd,3);
+					}
+					break;
+				case 4:
+					SLIME=SLIME+1;
+					if(SLIME>14) SLIME=12;
+					break;
+				case 5:
+					ch=6;
+					chb=chb+1;
+					if(chb>18){
+						chb=15;
+						ch=2;
+						SetTimer(hWnd,2,500,NULL);
+						KillTimer(hWnd,5);
+					}
+					break;
+				case 6:
+					MHP=27;
+					minusHP=minusHP+5;
+					if(minusHP>=40){
+						MHP=0;
+						KillTimer(hWnd,6);
+						minusHP=0;
+					}
+					break;
+				case 7:
+					chd=29;
+					chd++;
+					if(chd>32) chd=29;
+					break;
+			}
+			InvalidateRect(hWnd,NULL,FALSE);
+			return 0;
+
+		case WM_KEYDOWN:
+			switch(wParam){
+				case 'Q':
+					SetTimer(hWnd,3,50,NULL);
+					KillTimer(hWnd,2);
+					if(chx==sX+70){
+						aHP++;
+						SetTimer(hWnd,6,200,NULL);
+					}
+					if(aHP>26) aHP=21;
+					break;
+				case 'W':
+					SetTimer(hWnd,5,75,NULL);
+					KillTimer(hWnd,2);
+					break;
+				case VK_LEFT:
+					chx=chx-10;
+				
+					break;
+				case VK_RIGHT:
+					//x=x+10;
+					if (x>2048) x=0;
+					chx=chx+1;
+					
+					break;
+			}
+		return 0;
+		case WM_SETFOCUS:
+			SetFocus(hWnd);
+			return 0;
+
+		case WM_PAINT:
+			hdc=BeginPaint(hWnd,&ps);
+			DrawBitmap(hdc);
+			EndPaint(hWnd, &ps);
+			return 0;
+		case WM_COMMAND:
+			switch(LOWORD(wParam)){
+		case ID_FILE_MENU1:
+			MessageBox(hWnd,TEXT(" =======추가&수정해야 할 부분====== \n 1. 방어모션 추가(불가) \n 2. 몬스터HP구현(완료) \n 3. 캐릭터 움직임 다듬기 \n 4. 배경화면다듬기 \n 5. 공격모션구현 \n 6. 타격모션구현"),
+				TEXT("Adjust"),MB_OK);
+			break;
+		case ID_FILE_MENU2:
+			MessageBox(hWnd,TEXT("===== 리소스 출처 ===== \n 구글 검색-이미지"),
+				TEXT("Source"),MB_OK);
+			
+			break;
+			}
+			return 0;
+		case WM_DESTROY:
+			PostQuitMessage(0);
+			return 0;
+	}
+	return(DefWindowProc(hWnd,iMessage,wParam,lParam));
+}
+
+
+
+//    비트맵 파일을 화면에 보이게할 함수.
+//    w,x : 가로화면 스크롤값
+
+void DrawBitmap(HDC hdc)
+{	
+	
+	HDC hMemDC, hMemDC2;
+	HBITMAP hOldBitmap, hBackBit;
+
+	
+	hMemDC=CreateCompatibleDC(hdc);
+	hBackBit=CreateCompatibleBitmap(hdc,1000,480);
+	hOldBitmap=(HBITMAP)SelectObject(hMemDC,hBackBit);
+	hMemDC2=CreateCompatibleDC(hdc);
+        SelectObject(hMemDC2,background[1]);
+	//스크롤값
+		w=min(2048-x,1000);
+	
+		BitBlt(hMemDC,0,0,w,480,hMemDC2,x,0,SRCCOPY);
+		if (w > 2048) {
+		BitBlt(hMemDC,w,0,1000+w,480,hMemDC2,0,0,SRCCOPY);
+		}
+		
+		DeleteDC(hMemDC2);
+
+		TransBlt(hMemDC,chx,240,background[ch],RGB(255,255,255)); 
+		TransBlt(hMemDC,chx,240,background[chd],RGB(255,255,255)); 
+		TransBlt(hMemDC,chx,240,background[cha],RGB(255,255,255));
+		TransBlt(hMemDC,chx,240,background[chb],RGB(255,255,255));
+		TransBlt(hMemDC,chx,240,background[chc],RGB(255,255,255));
+		TransBlt(hMemDC,sX,300,background[SLIME],RGB(255,255,255));
+		TransBlt(hMemDC,200,270,background[aHP],RGB(255,255,255));
+		TransBlt(hMemDC,260,255-minusHP,background[MHP],RGB(255,255,255));
+		BitBlt(hdc,0,0,1000,480,hMemDC,0,0,SRCCOPY);
+
+		SelectObject(hMemDC,hOldBitmap);
+		DeleteObject(hBackBit);
+		DeleteDC(hMemDC);
+}
+
+/*
+비트맵의 필요없는 배경부분을 없애줄수 있는 함수.
+TransparentBle함수에 비하여 속도나 성능이 뛰어남.
+*/
+//* TransBlt 함수
+// 투명 비트맵을 출력하는 함수. (x,y)에 출력 위치. clrMask에 투명색을 준다.
+void TransBlt(HDC hdc, int x, int y, HBITMAP hbitmap, COLORREF clrMask)
+{
+	BITMAP bm;
+	COLORREF cColor;
+	HBITMAP bmAndBack, bmAndObject, bmAndMem, bmSave;
+	HBITMAP bmBackOld, bmObjectOld, bmMemOld, bmSaveOld;
+	HDC		hdcMem, hdcBack, hdcObject, hdcTemp, hdcSave;
+	POINT	ptSize;
+
+	hdcTemp = CreateCompatibleDC(hdc);
+	SelectObject(hdcTemp, hbitmap);
+	GetObject(hbitmap, sizeof(BITMAP), (LPSTR)&bm);
+	ptSize.x = bm.bmWidth;
+	ptSize.y = bm.bmHeight;
+	DPtoLP(hdcTemp, &ptSize,1);
+
+	hdcBack   = CreateCompatibleDC(hdc);
+	hdcObject = CreateCompatibleDC(hdc);
+	hdcMem    = CreateCompatibleDC(hdc);
+	hdcSave   = CreateCompatibleDC(hdc);
+
+	bmAndBack   = CreateBitmap(ptSize.x, ptSize.y, 1, 1, NULL);
+	bmAndObject = CreateBitmap(ptSize.x, ptSize.y, 1, 1, NULL);
+	bmAndMem    = CreateCompatibleBitmap(hdc, ptSize.x, ptSize.y);
+	bmSave      = CreateCompatibleBitmap(hdc, ptSize.x, ptSize.y);
+
+	bmBackOld   = (HBITMAP) SelectObject(hdcBack, bmAndBack);
+	bmObjectOld = (HBITMAP) SelectObject(hdcObject, bmAndObject);
+	bmMemOld    = (HBITMAP) SelectObject(hdcMem, bmAndMem);
+	bmSaveOld   = (HBITMAP) SelectObject(hdcSave, bmSave);
+
+	SetMapMode(hdcTemp, GetMapMode(hdc));
+
+	BitBlt(hdcSave, 0, 0, ptSize.x, ptSize.y, hdcTemp, 0, 0, SRCCOPY);
+
+	cColor = SetBkColor(hdcTemp, clrMask);
+
+	BitBlt(hdcObject, 0, 0, ptSize.x, ptSize.y, hdcTemp, 0, 0, SRCCOPY);
+
+	SetBkColor(hdcTemp, cColor);
+	SetBkColor(hdcTemp, cColor);
+
+	BitBlt(hdcBack, 0, 0, ptSize.x, ptSize.y, hdcObject, 0, 0, NOTSRCCOPY);
+	BitBlt(hdcMem , 0, 0, ptSize.x, ptSize.y, hdc      , x, y, SRCCOPY);
+	BitBlt(hdcMem , 0, 0, ptSize.x, ptSize.y, hdcObject, 0, 0, SRCAND);
+	BitBlt(hdcTemp, 0, 0, ptSize.x, ptSize.y, hdcBack  , 0, 0, SRCAND);
+	BitBlt(hdcMem , 0, 0, ptSize.x, ptSize.y, hdcTemp  , 0, 0, SRCPAINT);
+	BitBlt(hdc    , x, y, ptSize.x, ptSize.y, hdcMem   , 0, 0, SRCCOPY);
+	BitBlt(hdcTemp, 0, 0, ptSize.x, ptSize.y, hdcSave  , 0, 0, SRCCOPY);
+
+	DeleteObject(SelectObject(hdcBack, bmBackOld));
+	DeleteObject(SelectObject(hdcObject, bmObjectOld));
+	DeleteObject(SelectObject(hdcMem, bmMemOld));
+	DeleteObject(SelectObject(hdcSave, bmSaveOld));
+	
+	DeleteDC(hdcMem);
+	DeleteDC(hdcBack);
+	DeleteDC(hdcObject);
+	DeleteDC(hdcSave);
+	DeleteDC(hdcTemp);
+}
