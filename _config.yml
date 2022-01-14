@@ -5,7 +5,7 @@ description: >- # site description
 lang: ko-KR # default lang
 timezone: Asia/Seoul # set your timezone
 image: /assets/img/avatar.jpg # This image used for Open Graph more info https://ogp.me/
-repo: https://github.com/YunDaeHyeon # site repo [optional]
+repo: https://github.com/YunDaeHyeon/YunDaeHyeon.github.io # site repo [optional]
 mode: dark # default theme "dark" | "light"
 
 # Profile settings
