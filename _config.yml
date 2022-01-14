@@ -23,7 +23,7 @@ author:
 
 # URL settings
 url: "https://YunDaeHyeon.github.io" #
-baseurl: ""
+baseurl:
 permalink: /:title/
 google_analytics: # leave it blank if not wish
 fb_appid:
