@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2022-01-14T18:24:39+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">That’s DaeHyeon Git blog</title><subtitle>열심히 살아가고 싶은 대현의 공간</subtitle><author><name>YunDaeHyeon</name><email>kayuaao96@gmail.com</email></author><entry><title type="html">테스트2</title><link href="http://localhost:4000/git-test5/" rel="alternate" type="text/html" title="테스트2" /><published>2022-01-14T17:30:00+09:00</published><updated>2022-01-14T17:30:00+09:00</updated><id>http://localhost:4000/git-test5</id><content type="html" xml:base="http://localhost:4000/git-test5/"><![CDATA[<p>2</p>]]></content><author><name>YunDaeHyeon</name><email>kayuaao96@gmail.com</email></author><category term="jekyll" /><category term="update" /><summary type="html"><![CDATA[2]]></summary></entry><entry><title type="html">포스팅테스트 1</title><link href="http://localhost:4000/git-test4/" rel="alternate" type="text/html" title="포스팅테스트 1" /><published>2022-01-14T17:29:00+09:00</published><updated>2022-01-14T17:29:00+09:00</updated><id>http://localhost:4000/git-test4</id><content type="html" xml:base="http://localhost:4000/git-test4/"><![CDATA[<p>1</p>]]></content><author><name>YunDaeHyeon</name><email>kayuaao96@gmail.com</email></author><category term="jekyll" /><category term="update" /><summary type="html"><![CDATA[1]]></summary></entry><entry><title type="html">[C++] 클래스내에서 오름차순, 내림차순 (버블정렬)</title><link href="http://localhost:4000/git-test3/" rel="alternate" type="text/html" title="[C++] 클래스내에서 오름차순, 내림차순 (버블정렬)" /><published>2022-01-14T12:54:00+09:00</published><updated>2022-01-14T12:54:00+09:00</updated><id>http://localhost:4000/git-test3</id><content type="html" xml:base="http://localhost:4000/git-test3/"><![CDATA[<p>테스트</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Ascending</span>
+<span class="p">{</span>
+<span class="k">public</span> <span class="o">:</span>
+	<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+	<span class="kt">int</span> <span class="n">Dummy</span><span class="p">;</span>
+	<span class="kt">void</span> <span class="n">Ascending_Date</span><span class="p">();</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="n">Ascending</span> <span class="o">::</span> <span class="n">Ascending_Date</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+				<span class="n">Dummy</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+				<span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">y</span><span class="p">];</span>
+				<span class="n">a</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Dummy</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"오름차순 정렬 : "</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">DescendingOrder</span>
+<span class="p">{</span>
+<span class="k">public</span> <span class="o">:</span>
+	<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+	<span class="kt">int</span> <span class="n">Dummy</span><span class="p">;</span>
+	<span class="kt">void</span> <span class="n">DescendingOrder_Date</span><span class="p">();</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="n">DescendingOrder</span><span class="o">::</span><span class="n">DescendingOrder_Date</span><span class="p">()</span> 
+<span class="p">{</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+				<span class="n">Dummy</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+				<span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">y</span><span class="p">];</span>
+				<span class="n">a</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Dummy</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"내림차순 정렬 : "</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">Ascending</span> <span class="n">As</span><span class="p">;</span>
+	<span class="n">DescendingOrder</span> <span class="n">DeO</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+	<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"▼▽ 원하는 정수 10가지를 입력해주세요. ▽▼"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="s">"번째 값 : "</span><span class="p">;</span>
+		<span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">As</span><span class="p">.</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+		<span class="n">DeO</span><span class="p">.</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">As</span><span class="p">.</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+	<span class="p">}</span>
+	<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+	<span class="n">As</span><span class="p">.</span><span class="n">Ascending_Date</span><span class="p">();</span>
+	<span class="n">DeO</span><span class="p">.</span><span class="n">DescendingOrder_Date</span><span class="p">();</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><img src="/assets/img/blog/네이버/c++ 2.png" alt="image" class="align-center" /></p>
+
+<h2 id="프로그램-설명">프로그램 설명</h2>
+<hr />
+
+<p>​정수값을 띄고있는 데이터 10개를 클래스에서 연산하여 오름차순, 내림차순으로 정렬한다.</p>
+
+<h2 id="원리">원리</h2>
+<hr />
+
+<p>각각 Ascending, DescendingOrder이라는 클래스에 더미값으로 사용할 변수와
+배열변수, 함수를 선언하고 그 클래스와 연결되어있는 객체 As, DeO를 선언한다.</p>
+
+<p>main함수에서 객체에 연결되어있는 배열변수에 10가지 값을 입력시키면 따로 선언한 함수에 값이 전달이 되는 동시에 각 클래스에서 선언한 함수 Ascending_Date(), DescendingOrder_Date() 등을 상속시켜 함수내에서 데이터를 정렬시킨다.</p>]]></content><author><name>YunDaeHyeon</name><email>kayuaao96@gmail.com</email></author><category term="jekyll" /><category term="update" /><category term="blog" /><category term="c++" /><summary type="html"><![CDATA[테스트 ```c++ #include using namespace std;]]></summary></entry><entry><title type="html">[Jekyll] 블로그 포스팅 테스트2</title><link href="http://localhost:4000/git-test2/" rel="alternate" type="text/html" title="[Jekyll] 블로그 포스팅 테스트2" /><published>2022-01-12T23:40:00+09:00</published><updated>2022-01-12T23:40:00+09:00</updated><id>http://localhost:4000/git-test2</id><content type="html" xml:base="http://localhost:4000/git-test2/"><![CDATA[<p>마크다운 테스트</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="kp">include</span> <span class="o">&lt;</span><span class="n">stdio</span><span class="p">.</span><span class="nf">h</span><span class="o">&gt;</span>
+
+<span class="n">int</span> <span class="n">main</span><span class="p">(){</span>
+    <span class="nb">printf</span><span class="p">(</span><span class="s2">"깃블로그 포스팅 테스트"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">#=&gt; 깃블로그 포스팅 테스트</span></code></pre></figure>]]></content><author><name>YunDaeHyeon</name><email>kayuaao96@gmail.com</email></author><category term="jekyll" /><category term="update" /><summary type="html"><![CDATA[마크다운 테스트]]></summary></entry><entry><title type="html">[Jekyll] 블로그 포스팅 테스트1</title><link href="http://localhost:4000/git-test/" rel="alternate" type="text/html" title="[Jekyll] 블로그 포스팅 테스트1" /><published>2022-01-12T23:24:00+09:00</published><updated>2022-01-12T23:24:00+09:00</updated><id>http://localhost:4000/git-test</id><content type="html" xml:base="http://localhost:4000/git-test/"><![CDATA[<p>‘동해물과 백두산이’ 마르고 닳도록 하느님이 보우하사 우리나라 만세
+‘내 이름은 윤대현 이다.’</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="n">main</span><span class="p">{</span>
+  <span class="kp">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="no">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">){</span>
+    <span class="no">System</span><span class="p">.</span><span class="nf">out</span><span class="p">.</span><span class="nf">println</span><span class="p">(</span><span class="s2">"내 이름은 윤대현 이다."</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">#=&gt; 출력 결과 = "내 이름은 윤대현 이다."</span></code></pre></figure>]]></content><author><name>YunDaeHyeon</name><email>kayuaao96@gmail.com</email></author><category term="jekyll" /><category term="update" /><summary type="html"><![CDATA[‘동해물과 백두산이’ 마르고 닳도록 하느님이 보우하사 우리나라 만세 ‘내 이름은 윤대현 이다.’]]></summary></entry></feed>
