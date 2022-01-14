@@ -22,7 +22,7 @@ author:
   avatar: /assets/img/avatar.jpg # change with your own avatar
 
 # URL settings
-url: "https://yundaehyeon.github.io" #
+url: "https://YunDaeHyeon.github.io" #
 baseurl: ""
 permalink: /:title/
 google_analytics: # leave it blank if not wish
