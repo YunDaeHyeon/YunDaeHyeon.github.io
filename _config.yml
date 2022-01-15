@@ -43,7 +43,7 @@ defaults:
   - scope:
       path: ""
     values:
-      toc: true
+      pagination: true
       layout: post
       comments: false
       futrue: true
@@ -61,7 +61,6 @@ jekyll_compose:
 
 # Homepage limit posts
 number_of_posts: 5
-
 # Build settings
 # theme: klise
 sass:
