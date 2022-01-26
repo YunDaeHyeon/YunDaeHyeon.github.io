@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[Spring] Maven 대신 Gradle을 사용하는 이유"
+title:  "[spring] Maven 대신 Gradle을 사용하는 이유"
 date:   2022-01-26 18:01:00+0900
 categories: jekyll update
 tags: [spring]
@@ -15,5 +15,11 @@ tags: [spring]
 <i>1. STS에서 만든 플러그인<br>
 2. Gradle Inc.에서 만든 Buildship</i>
 </center>
+
+# Maven vs Gradle
+- Maven은 프로젝트가 커질수록 빌드 스크립트의 내용이 길어지고 가독성이 떨어짐.  
+- Maven의 경우 멀티 프로젝트에서 특정 설정을 다른 모듈에서 사용하려면 상속을 받아야 한다.  
+- Gradle은 훨씬 적은 양의 스크립트로 짧고 간결하게 작성 가능.  
+- Gradle은 설정 주입 방식을 사용한다.(멀티 프로젝트에 매우 적합하다는 것을 의미)  
 
 <br><small><i>정보 출처 : 인사이트-스프링부트 시작하기-김진우님</i></small>
