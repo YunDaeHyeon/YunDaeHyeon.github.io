@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[spring] Maven 대신 Gradle을 사용하는 이유"
+title:  "[Spring] Maven 대신 Gradle을 사용하는 이유"
 date:   2022-01-26 18:01:00+0900
 categories: jekyll update
 tags: [spring]

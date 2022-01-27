@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[spring] 그레이들(Gradle)"
+title:  "[Spring] 그레이들(Gradle)"
 date:   2022-01-27 00:39:00+0900
 categories: jekyll update
 tags: [spring]

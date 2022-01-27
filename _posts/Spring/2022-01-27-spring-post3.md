@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[spring] 메이븐(Maven)"
+title:  "[Spring] 메이븐(Maven)"
 date:   2022-01-27 00:12:00+0900
 categories: jekyll update
 tags: [spring]
