@@ -38,12 +38,12 @@ implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
 # 문법
 1. @{...} URL 링크 표현식  
-2. |...| 리터널 대체  
+2. \|...\| 리터널 대체  
 3. ${...} 변수  
 4. th:each 반복 출력  
 5. *{...} 선택 변수  
 6. #{...} 메세지를 뜻하며 properties 같은 외부 자원에서 해당 코드에 해당하는 문자열을 불러온다.
   
 ---
-참고
+참고  
     1. [연로그](https://yeonyeon.tistory.com/153)
