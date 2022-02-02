@@ -41,22 +41,6 @@ body {
   height: 100%;
 }
 
-.timeline-event {
-  position: relative;
-}
-.timeline-event:hover .timeline-event-icon {
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-  background-color: #a83279;
-}
-.timeline-event:hover .timeline-event-thumbnail {
-  -moz-box-shadow: inset 40em 0 0 0 #a83279;
-  -webkit-box-shadow: inset 40em 0 0 0 #a83279;
-  box-shadow: inset 40em 0 0 0 #a83279;
-}
-
 .timeline-event-copy {
   padding: 2em;
   position: relative;
@@ -75,44 +59,7 @@ body {
   font-weight: 500;
 }
 .timeline-event-copy p:not(.timeline-event-thumbnail) {
-  padding-bottom: 1.2em;
-}
-
-.timeline-event-icon {
-  -moz-transition: -moz-transform 0.2s ease-in;
-  -o-transition: -o-transform 0.2s ease-in;
-  -webkit-transition: -webkit-transform 0.2s ease-in;
-  transition: transform 0.2s ease-in;
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
-  background-color: black;
-  outline: 10px solid white;
-  display: block;
-  margin: 0.5em 0.5em 0.5em -0.5em;
-  position: absolute;
-  top: 0;
-  left: 2em;
-  width: 1em;
-  height: 1em;
-}
-
-.timeline-event-thumbnail {
-  -moz-transition: box-shadow 0.5s ease-in 0.1s;
-  -o-transition: box-shadow 0.5s ease-in 0.1s;
-  -webkit-transition: box-shadow 0.5s ease-in;
-  -webkit-transition-delay: 0.1s;
-  transition: box-shadow 0.5s ease-in 0.1s;
-  color: white;
-  font-size: 0.75em;
-  background-color: black;
-  -moz-box-shadow: inset 0 0 0 0em #ef795a;
-  -webkit-box-shadow: inset 0 0 0 0em #ef795a;
-  box-shadow: inset 0 0 0 0em #ef795a;
-  display: inline-block;
-  margin-bottom: 1.2em;
-  padding: 0.25em 1em 0.2em 1em;
+  padding-bottom: 1em;
 }
 
     </style>
@@ -122,8 +69,7 @@ body {
 </head>
 <body>
   <ul class="timeline">
-  <li class="timeline-event">
-    <label class="timeline-event-icon"></label>
+  <oi class="timeline-event">
     <div class="timeline-event-copy">
       <h4> ~ 2019 </h4>
       <h4>Graduation from high school</h4><hr>
@@ -131,9 +77,8 @@ body {
       <h5>High school computer club "Ramda"</h5><hr>
       <p><strong>Main tutor</strong> for more than a year</p></p>
     </div>
-  </li>
-  <li class="timeline-event">
-    <label class="timeline-event-icon"></label>
+  </oi>
+  <oi class="timeline-event">
     <div class="timeline-event-copy">
       <h4>2020 1st Semester</h4><hr>
       <p>- 3D Printing Comprehension and Applications</p>
@@ -144,9 +89,8 @@ body {
       <p>- Practical native English 1</p>
       <p>- Introduction to the technology of the 4th Industrial Revolution</p>
     </div>
-  </li>
-  <li class="timeline-event">
-    <label class="timeline-event-icon"></label>
+  </oi>
+  <oi class="timeline-event">
     <div class="timeline-event-copy">
       <h4>2020 2nd Semester</h4><hr>
       <p>- Advanced Programming Language and Experimentation</p>
@@ -159,9 +103,8 @@ body {
       <h4>University computer club</h4><hr>
       <p>team leader of the cryptographic algorithm (security) Java project</p>
     </div>
-  </li>
-  <li class="timeline-event">
-    <label class="timeline-event-icon"></label>
+  </oi>
+  <oi class="timeline-event">
     <div class="timeline-event-copy">
       <h4>2021 1st Semester</h4><hr>
       <p>- Discrete Mathematics</p>
@@ -174,9 +117,8 @@ body {
       <h4>University computer club</h4><hr>
       <p>General manager of Java Learning</p>
     </div>
-  </li>
-  <li class="timeline-event">
-    <label class="timeline-event-icon"></label>
+  </oi>
+  <oi class="timeline-event">
     <div class="timeline-event-copy">
       <h4>2021 2st Semester</h4><hr>
       <p>- Programming linguistics</p>
@@ -191,7 +133,7 @@ body {
       <h4>SW mentor team</h4><hr>
       <p>SW mentor team activities</p>
     </div>
-  </li>
+  </oi>
 </ul>
 </body>
 <!--
