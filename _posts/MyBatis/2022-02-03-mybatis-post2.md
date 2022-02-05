@@ -14,7 +14,7 @@ tags: [mybatis]
 # 데이터베이스는?
 데이터베이스의 경우 _(underscore)를 사용하는 스네이크(Snake_case) 표기법을 사용한다.  
 즉, 자바는 **카멜** DB는 **스네이크**를 사용하여 이를 위한 조치가 필요하다.  
-예를 들어 DB에서 user의 name을 조회하면 user_name이 조회되지만 자바(DTO)에서 user의 name은 userName으로 되어 있어
+예를 들어 DB에서 user의 name을 조회하면 **user_name**이 조회되지만 자바(DTO)에서 user의 name은 **userName**으로 되어 있어
 자바와 DB를 매핑해야하는 필요가 생긴다.
 
 # 자바 <-> DB 매핑
