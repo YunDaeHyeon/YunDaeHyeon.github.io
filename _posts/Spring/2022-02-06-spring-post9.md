@@ -15,15 +15,17 @@ tags: [spring]
 <p align="center"><img src="/assets/img/blog/정보/spring security.png"></p>
 
 # 인증(Authntication) / 권한(Authorization)
+  
 ## 인증(Authntication)
  > 사용자가 본인인지 확인한다. (해당 애플리케이션에 접속하려는 사람은 누구인가?)  
  > Session과 Token을 관리한다. (UsernamePassword를 통한 인증)  
  > SNS로그인을 통한 인증 **위임** 가능.  
+
 ## 권한(Authorization)
  > **권한**을 설정한다. (사용자가 어떤 일을 할 수 있는가?)  
  > 특정 페이지/리소스에 접근할 수 있는지 **권한**을 판단한다.  
  > 여러가지 어노테이션(ex: Secured, PrePostAuthorize 등)을 이용하여 쉽게 **권한** 체크 가능.  
- > ***비즈니스 로직이 복잡하면, AOP를 이용하여 권한을 체크해야 한다...***
+ > ***비즈니스 로직이 복잡하면, AOP를 이용하여 권한을 체크해야 한다...***  
 
 # 스프링 시큐리티(Spring Security) Dependency 추가
 ```java
