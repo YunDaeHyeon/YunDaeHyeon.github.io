@@ -5,17 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <html lang="ko" xmlns:th="http://www.thymeleaf.org"></html>
-    <title>Login fail</title>
+    <title>Login</title>
 </head>
 <style>
+    table{
+        margin-left: auto;
+        margin-right: auto;
+    }
     body{
         text-align: center;
     }
 </style>
 <body>
-    <div class="container">
-        <h2>!!! 로그인 실패 !!!</h2>
-        <button type="button" onclick="location.href='loginPage'">돌아가기</button>
-    </div>
+<div class="container">
+    <h2>회원가입</h2>
+    <form method="post" action="register_action">
+        <table class="login_table">
+            <tr>
+                <td>아이디</td>
+                <td><input type="text" name="userId" placeholder="아이디"></td>
+            </tr>
+            <tr>
+                <td>비밀번호</td>
+                <td><input type="password" name="userPassword" id="userPassword" placeholder="비밀번호"></td>
+            </tr>
+            <tr>
+                <td>이름</td>
+                <td><input type="text" name="userName" placeholder="이름"></td>
+            </tr>
+        </table>
+        <button type="submit">가입하기</button>
+    </form>
+</div>
 </body>
 </html>
