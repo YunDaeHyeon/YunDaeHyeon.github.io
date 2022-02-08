@@ -21,7 +21,8 @@ author:
   avatar: /assets/img/avatar.jpg # change with your own avatar
 
 # URL settings
-url: "https://daegom.com" #
+url: "https://www.daegom.com" #
+enforce_ssl: www.daegom.com
 baseurl:
 permalink: /main/:title/
 google_analytics: G-X29ZTCLYTV
