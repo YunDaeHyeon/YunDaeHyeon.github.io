@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[알고리즘] 그리디 알고리즘(Greedy Algorithm) "
-data:   2022-02-10 18:25:00+0900
+data:   2022-02-11 00:12:00+0900
 categories: jekyll update
 tags: [algorigtm]
 ---
