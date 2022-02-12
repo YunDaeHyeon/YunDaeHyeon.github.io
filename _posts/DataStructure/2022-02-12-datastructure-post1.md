@@ -52,7 +52,16 @@ tags: [java, data structure]
 <small><i>출처 : http://www.tcpschool.com/java/java_collectionFramework_concept</i></small>
 </center>
   
+### 컬렉션 인터페이스의 특징 정리
   
+|   인터페이스   |                                                         설명                                                        |                 구현 클래스                 |
+|:------------------:|:-------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------:|
+| List \<E\>   | 순서가 있는 데이터의 집합, 데이터의 중복을 허용함.                                                                  | Vector, ArrayList, LinkedList, Stack, Queue |
+| Set \<E\>    | 순서가 없는 데이터의 집합, 데이터의 중복을 허용하지 않음.                                                           | HashSet, TreeSet                             |
+| Map \<E\>    | 키와 한 쌍으로 이루어지는 데이터의 집합, 순서가 없음, 키(Key)는 중복을 허용하지 않지만, 값(Value)은 중복될 수 있음. | HashMap, TreeMap, HashTable, Properties     |
+  
+  
+
 ---
 [참고 및 리소스 출처]  
 [Stranger's LAB](https://st-lab.tistory.com/142)  
