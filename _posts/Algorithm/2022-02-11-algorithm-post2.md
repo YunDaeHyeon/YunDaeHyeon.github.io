@@ -35,3 +35,9 @@ public class Question1 {
 7680 // 입력
 20 // 출력
 ```
+  
+
+
+---
+[참조]  
+[나동빈님](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9791162243077)
