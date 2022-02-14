@@ -101,9 +101,7 @@ R R R D D D U D D   // 입력
 5 4                 // 출력
 ```
   
-# 모범 답안
+
   
-# 설명
----
 [문제 출처]  
 [나동빈님](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9791162243077)
