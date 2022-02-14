@@ -79,5 +79,5 @@ case 2 :
 
 
 ---
-[참조]  
+[문제 출처]  
 [나동빈님](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9791162243077)
