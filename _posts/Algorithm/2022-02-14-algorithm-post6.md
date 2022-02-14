@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[알고리즘, 구현] Java - 상하좌우"
+title: "[알고리즘, 구현, 완전탐색] Java - 상하좌우"
 data:   2022-02-14 18:19:00+0900
 categories: jekyll update
 tags: [algorigtm]
@@ -102,6 +102,6 @@ R R R D D D U D D   // 입력
 ```
   
 
-  
+
 [문제 출처]  
 [나동빈님](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9791162243077)
