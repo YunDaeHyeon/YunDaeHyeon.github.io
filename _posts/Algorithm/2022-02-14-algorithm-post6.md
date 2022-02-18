@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[알고리즘, 구현, 완전탐색] Java - 상하좌우"
+title: "[알고리즘, 구현] Java - 상하좌우"
 data:   2022-02-14 18:19:00+0900
 categories: jekyll update
 tags: [algorigtm]

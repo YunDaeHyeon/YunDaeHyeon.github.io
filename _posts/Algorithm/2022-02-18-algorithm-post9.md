@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "[알고리즘, 구현, 완전탐색] Java - 게임 개발"
+title: "[알고리즘, 구현] Java - 게임 개발"
 data:   2022-02-18 19:40:00+0900
 categories: jekyll update
 tags: [algorigtm]
 ---
-# 구현/완전탐색 문제 - 게임 개발
+# 구현 - 게임 개발
 현민이는 게임 캐릭터가 맵 안에서 움직이는 시스템을 개발 중이다. 캐릭터가 있는 장소는 1 x 1 크기의 정사각형으로 이뤄진
 N x M 크기의 직사각형으로, 각각의 칸은 육지 또는 바다이다. 캐릭터는 동서남북 중 한 곳을 바라본다.  
 맵의 각 칸은 (A, B)로 나타낼 수 있고, A는 북쪽으로부터 떨어진 칸의 개수, B는 서쪽으로부터 떨어진 칸의 개수이다.  
@@ -46,46 +46,91 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Question4 {
-//    static int[] positionX = {0, 1, -1, 0}; // 북 동 남 서 (Up, Right, Down, Left)
-//    static int[] positionY = {-1, 0, 0, 1}; // 북 동 남 서 (Up, Right, Down, Left)
+    static int[] positionX = {0,1,0,-1}; // 북 동 남 서
+    static int[] positionY = {-1,0,1,0}; // 북 동 남 서
     static int direction;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " "); // 맵의 크기 입력
         int[][] map = new int[Integer.parseInt(st.nextToken())][Integer.parseInt(st.nextToken())]; // [N][M]
         st = new StringTokenizer(br.readLine(), " ");
-//        int y = Integer.parseInt(st.nextToken());
-//        int x = Integer.parseInt(st.nextToken());
+        int A = Integer.parseInt(st.nextToken()); // 게임캐릭터의 좌표 Y
+        int B = Integer.parseInt(st.nextToken()); // 게임캐릭터의 좌표 X
         direction = Integer.parseInt(st.nextToken()); // 방향
-        int count = 0;
+        int count = 1; // 시작지점 자체가 이미 방문지점이므로 0이 아닌 1부터 시작
+        int directionCount = 0; // 3단계 방향 전환 카운트 변수
         for(int i = 0 ; i < map.length ; i++){
             st = new StringTokenizer(br.readLine(), " ");
             for(int j = 0 ; j < map[i].length; j++) map[i][j] = Integer.parseInt(st.nextToken()); // 맵 생성
         }
-
+        map[A][B] = 1; // 시작지 방문 처리
         // 움직임 시작
         while(true) {
-            turnLeft();
-
+            turnLeft(); // 현재 위치에서 현재 방향을 기준으로 왼쪽 방향부터 갈 곳을 정한다.
+            int x = B + positionX[direction]; // 바라보는 방향으로 전진
+            int y = A + positionY[direction];
+            if(map[y][x] == 0){ // 왼쪽 방향에 아직 가보지 않은 칸이 존재한다면, (= 육지인 경우)
+                map[y][x] = 1; // 방문처리
+                count++; // 방문한 칸의 횟수 카운트
+                directionCount = 0; // 방향 초기화
+                B = x; // 캐릭터 위치 이동
+                A = y; // 캐릭터 위치 이동
+            }else{  // 왼쪽 방향에 가보지 않은 칸이 존재하지 않다면, (= 바다인 경우)
+                directionCount++; // 왼쪽으로 방향 전환을 했으니 +1
+            }
+            if(directionCount == 4){ // 북 동 남 서 모두 가봤다면
+                x = B - positionX[direction]; // 바라보는 방향 유지하고 한 칸 뒤로
+                y = A - positionY[direction];
+                if(map[y][x] == 0){ // 뒤로 갈 수 있는 경우 (육지인 경우)
+                    B = x;  // 캐릭터 위치 이동
+                    A = y;
+                }else{ // 뒤로 갈 수 없는 경우 (바다인 경우)
+                    break;
+                }
+                directionCount = 0;
+            }
         }
+        System.out.println(count);
     }
     public static void turnLeft(){
-        direction--;
+        direction -= 1;
         if(direction < 0) direction = 3; // 0 : 북쪽, 1 : 동쪽, 2 : 남쪽, 3 : 서쪽
     }
 }
-# 아직 문제 풀이중...
+# 머리 아파 죽을 뻔
 ```
   
 # 결과
 case 1 :  
 ```console
+4 4         // 입력 (아래까지)
+1 1 0
+1 1 1 1
+1 0 0 1
+1 1 0 1
+1 1 1 1
+3           // 출력
 ```
 case 2:  
 ```console
+5 5         // 입력
+1 1 0
+1 1 1 1 1
+1 0 0 0 1
+1 1 1 0 1
+1 1 1 0 1
+1 1 1 1 1
+5           // 출력
 ```
 case 3:
 ```console
+4 4         // 입력
+1 1 1
+1 1 1 1
+1 0 0 1
+1 1 0 1
+1 1 1 1
+3           // 출력
 ```
   
   
