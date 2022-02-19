@@ -58,3 +58,10 @@ List<T> vector = new Vector<>();
 List<T> stack = new Stack<>();
 ! primitive type으로 선언은 불가능하다.
 ```
+  
+  
+  
+---
+[참고 및 리소스 출처]  
+[Stranger's LAB](https://st-lab.tistory.com/142)  
+[TCPschool](http://www.tcpschool.com/java/java_collectionFramework_concept)  
