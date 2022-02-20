@@ -7,7 +7,7 @@ tags: [java, data structure]
 ---
 
 **해당 게시글은 [[Java, 자료구조] Stack 구현하기(1/2) - Stack Interface]()와 이어진다.**  
-해당 포스팅은 자료구조 중 하나인 **Stack**에 대해 이해하기 위해 스터디 목적으로 직접 Stack을 구현해보는 포스팅이다. Java에서 지원하는 Stack 클래스에 대한 사용법이 아니다. 실습을 진행할 때 사용된 코드는 모두 [Stranger's Lab](https://st-lab.tistory.com/174?category=856997)님의 게시글을 참고로 하여 구현하였다.
+해당 포스팅은 자료구조 중 하나인 **Stack**에 대해 이해하기 위해 스터디 목적으로 직접 Stack을 구현해보는 포스팅이다. Java에서 지원하는 Stack 클래스에 대한 사용법이 아니다. 실습을 진행할 때 사용된 코드는 모두 [Stranger's Lab](https://st-lab.tistory.com/174?category=856997)님의 게시글과 설명을 참고로 하여 구현하였다.
 
 # Stack 클래스 구현하기
 **Stack 클래스를 생성한 뒤 StackInterface를 implements 시킨다.**  
