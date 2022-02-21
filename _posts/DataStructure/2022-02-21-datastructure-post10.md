@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[Java, 자료구조] LinkedList를 이용한 큐(Queue) 구현하기 (2/2) - Queue 구현"
-data:   2022-02-21 17:28:00+0900
+data:   2022-02-21 18:29:00+0900
 categories: jekyll update
 tags: [java, data structure]
 ---
@@ -9,10 +9,10 @@ tags: [java, data structure]
 해당 포스팅은 자료구조 중 하나인 **Queue**에 대해 이해하기 위해 스터디 목적으로 직접 List를 구현해보는 포스팅이다. Java에서 지원하는 Queue 클래스에 대한 사용법이 아니다. 실습을 진행할 때 사용된 코드는 모두 [Stranger's Lab](https://st-lab.tistory.com/184?category=856997)님의 게시글과 설명을 참고로 하여 구현하였다.
 
 ## 구현할 메소드
-- public boolean offer(E value) : 큐 tail(rear)에 데이터를 추가한다. 정상적으로 삭제되었다면 true를 반환한다.  
-- public E poll() : 큐 head(front)에 있는 데이터를 삭제한다. 삭제할 요소가 없다면 `null`을 반환한다.  
+- public boolean offer(E value) `@Override` : 큐 tail(rear)에 데이터를 추가한다. 정상적으로 삭제되었다면 true를 반환한다.  
+- public E poll() `@Override` : 큐 head(front)에 있는 데이터를 삭제한다. 삭제할 요소가 없다면 `null`을 반환한다.  
 - public E remove() : 큐 head(front)에 있는 데이터를 삭제한다. 삭제할 요소가 없다면 `NoSuchElementException`을 반환한다.  
-- public E peek() : 큐 head(front)에 있는 데이터를 가져온다. 가져올 요소가 없다면 `null`을 반환한다.  
+- public E peek() `@Override` : 큐 head(front)에 있는 데이터를 가져온다. 가져올 요소가 없다면 `null`을 반환한다.  
 - public E element() : 큐 head(front)에 있는 데이터를 가져온다. 가져올 요소가 없다면 `NoSuchElementException`을 반환한다.  
 - public int size() : 큐에 있는 요소의 개수를 가져온다.  
 - public boolean isEmpty() : 큐가 비어있는지 판별한다. 큐가 비어있다면 true를, 비어있지 않다면 false를 반환한다.  
