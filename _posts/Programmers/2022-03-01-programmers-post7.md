@@ -47,16 +47,13 @@ Jack
 
 # 정답
 ```sql
-SELECT ANIMAL_ID, NAME, DATETIME from ANIMAL_INS ORDER BY NAME, DATETIME Desc
+SELECT NAME from ANIMAL_INS ORDER BY DATETIME LIMIT 1
 ```
 
 # 설명
-문제에서 요구하는 기준은 2가지 이다.  
-1. 모든 동물의 아이디와 이름, 보호 시작일을 **이름 순으로**조회하기  
-2. 이름이 같은 동물 중에서는 **보호를 나중에 시작한** 동물이 먼저 보여져야 한다.  
-즉, **이름 순으로 조회**한다는 것은 ASC에 해당하는 **오름차순 정렬** 수행 후, DESC에 해당하는 **내림차순 정렬**을 수행시키면 된다.  
-  
-`NAME`을 정렬한다.(ORDER BY `NAME`) 그 뒤(,) `DATETIME`도 내림차순 정렬(Desc) 시켜준다.  
+문제에서 요구하는 것은 **가장 먼저 들어온 동물**을 뽑아내는 것이다. `DATATIME` 필드를 **오름차순 정렬**시킨 뒤 상위 레코드를 뽑아내는 `LIMIT`구문을 사용한다.  
+`ORDER BY DATETIME` = `DATETIME`을 **오름차순으로 정렬한다.**
+`LIMIT 1` = **상위 레코드 1개를 뽑아낸다.**
 
 ---
 [문제 출처]  
