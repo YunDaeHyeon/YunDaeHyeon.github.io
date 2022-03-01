@@ -47,11 +47,11 @@ count
 
 # 정답
 ```sql
-SELECT COUNT(*) FROM ANIMAL_INS
+SELECT COUNT(DISTINCT(NAME)) FROM ANIMAL_INS
 ```
 
 # 설명
-COUNT 함수를 이용하여 테이블에 몇 개의 레코드가 있는지 조회한다.  
+`DISTINCT`함수를 이용하여 NAME에 있는 중복된 데이터를 제거한 뒤 `COUNT` 함수를 이용하여 레코드의 개수를 뽑아낸다.    
   
   
 
