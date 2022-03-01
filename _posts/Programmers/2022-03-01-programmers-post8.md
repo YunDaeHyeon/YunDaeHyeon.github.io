@@ -3,7 +3,7 @@ layout: post
 title:  "[Programmers, SQL 고득점 Kit] SUM, MAX, MIN - 최댓값 구하기"
 date:   2022-03-01 18:14:00+0900
 categories: jekyll update
-tags: [programmers]
+tags: [programmers level 1]
 ---
 
 <p align="center"><img src="/assets/img/blog/정보/프로그래머스.png"></p>

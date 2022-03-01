@@ -3,12 +3,12 @@ layout: post
 title:  "[Programmers, SQL 고득점 Kit] SELECT - 아픈 동물 찾기"
 date:   2022-03-01 17:20:00+0900
 categories: jekyll update
-tags: [programmers]
+tags: [programmers level 1]
 ---
 
 <p align="center"><img src="/assets/img/blog/정보/프로그래머스.png"></p>
 
-# 프로그래머스 SQL 고득점 SELECT LEVEL 1 - 역순 정렬하기
+# 프로그래머스 SQL 고득점 SELECT LEVEL 1 - 아픈 동물 찾기
 ## 문제
 ANIMAL_INS 테이블은 동물 보호소에 들어온 동물의 정보를 담은 테이블입니다. ANIMAL_INS 테이블 구조는 다음과 같으며, ANIMAL_ID, ANIMAL_TYPE, DATETIME, INTAKE_CONDITION, NAME, SEX_UPON_INTAKE는 각각 동물의 아이디, 생물 종, 보호 시작일, 보호 시작 시 상태, 이름, 성별 및 중성화 여부를 나타냅니다.  
 

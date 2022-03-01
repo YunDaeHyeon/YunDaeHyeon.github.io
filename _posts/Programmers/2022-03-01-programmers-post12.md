@@ -3,7 +3,7 @@ layout: post
 title:  "[Programmers, SQL 고득점 Kit] GROUP BY - 고양이와 개는 몇 마리 있을까"
 date:   2022-03-01 22:42:00+0900
 categories: jekyll update
-tags: [programmers]
+tags: [programmers level 2]
 ---
 
 <p align="center"><img src="/assets/img/blog/정보/프로그래머스.png"></p>

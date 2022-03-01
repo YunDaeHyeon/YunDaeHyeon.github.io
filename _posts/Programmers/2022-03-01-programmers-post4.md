@@ -3,7 +3,7 @@ layout: post
 title:  "[Programmers, SQL 고득점 Kit] SELECT - 어린 동물 찾기"
 date:   2022-03-01 17:25:00+0900
 categories: jekyll update
-tags: [programmers]
+tags: [programmers level 1]
 ---
 
 <p align="center"><img src="/assets/img/blog/정보/프로그래머스.png"></p>

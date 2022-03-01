@@ -3,7 +3,7 @@ layout: post
 title:  "[Programmers, SQL 고득점 Kit] SELECT - 모든 레코드 조회하기"
 date:   2022-03-01 15:01:00+0900
 categories: jekyll update
-tags: [programmers]
+tags: [programmers level 1]
 ---
 
 <p align="center"><img src="/assets/img/blog/정보/프로그래머스.png"></p>
@@ -60,4 +60,4 @@ DESC : 내림차순이다.
   
 ---
 [문제 출처]  
-[프로그래머스](https://programmers.co.kr/)의 SQL 고득점 Kit
+[프로그래머스](https://programmers.co.kr/)의 SQL 고득점 Kit  
