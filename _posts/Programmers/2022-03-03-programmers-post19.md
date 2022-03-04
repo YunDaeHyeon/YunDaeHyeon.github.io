@@ -63,11 +63,30 @@ A349990 	Spice
 
 # 정답
 ```sql
-
+SELECT
+ANIMAL_OUTS.ANIMAL_ID,
+ANIMAL_OUTS.NAME
+FROM ANIMAL_INS RIGHT OUTER JOIN ANIMAL_OUTS
+ON ANIMAL_OUTS.ANIMAL_ID = ANIMAL_INS.ANIMAL_ID
+WHERE ANIMAL_INS.ANIMAL_ID IS NULL
+ORDER BY ANIMAL_OUTS.ANIMAL_ID
 ```
   
 # 설명
+문제에서 요구하는 것들을 확인하자.  
+1. **입양을 간 기록은 있는데 보호소에 들어온 기록이 없는 동물들**  
+2. **1번의 조건을 만족하는 동물의 아이디와 이름을 조회**  
+문제를 잘 읽어보면 **보호소에 들어온 시점을 기록한 테이블은 `ANIMAL_INS`이며 입양을 보낸 시점을 기록한 테이블은 `ANIMAL_OUTS`이다.** 입양을 간 기록은 있는데 **보호소에 들어온 기록이 없다는 것**은 `ANIMAL_OUTS`에는 데이터가 존재하지만 `ANIMAL_INS`에는 **데이터가 없다는**의미이다. 따라서 `RIGHT JOIN`을 사용하여 `ANIMAL_OUTS`에 있는 데이터만 조회를 시키며 `ANIMAL_INS`와 공통되는 데이터가 없어야 하기에 `ANIMAL_INS`데이터가 NULL인 데이터만 조회되도록 시키면 된다.  
 
+```sql
+FROM ANIMAL_INS RIGHT OUTER JOIN ANIMAL_OUTS
+ON ANIMAL_OUTS.ANIMAL_ID = ANIMAL_INS.ANIMAL_ID
+```
+위 쿼리를 통하여 `ANIMAL_INS`테이블과 `ANIMAL_OUTS` 테이블을 조인시켜
+```sql
+WHERE ANIMAL_INS.ANIMAL_ID IS NULL
+```
+조건문을 사용하여 `ANIMAL_INS`에 데이터가 존재하지 않고 `ANIMAL_OUTS`에만 존재하는 데이터를 조회한다.  
 
 ---
 [문제 출처]  
