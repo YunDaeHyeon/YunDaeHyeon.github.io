@@ -57,11 +57,35 @@ A381217	    Cherokee
 
 # 정답
 ```sql
-
+SELECT
+ANIMAL_OUTS.ANIMAL_ID,
+ANIMAL_OUTS.NAME
+FROM ANIMAL_INS INNER JOIN ANIMAL_OUTS
+ON ANIMAL_INS.ANIMAL_ID = ANIMAL_OUTS.ANIMAL_ID
+WHERE ANIMAL_OUTS.DATETIME < ANIMAL_INS.DATETIME
+ORDER BY ANIMAL_INS.DATETIME
 ```
   
 # 설명
-
+문제에서 요구하는 것은 다음과 같다.  
+1. **보호 시작일보다 입양일이 더 빠른 데이터 조회**  
+2. **결과는 보호 시작일이 더 빠른 순으로 조회**  
+즉, 관리자의 실수로 인하여 보호 시작일보다 **입양일이 더 빠른** 데이터들을 조회시키면 된다.  
+보호시작일에 해당하는 테이블 `ANIMAL_INS`과 입양일에 해당하는 테이블 `ANIMAL_OUTS` 테이블을 조인시키자.  
+이때, 보호 시작일보다 입양일이 더 빠르다는 것은 **보호 시작과 동시에 입양을 간 데이터가 모두 있어야 한다는 의미이다.** 즉 `ANIMAL_INS`에 있는 데이터는 `ANIMAL_OUTS`에도 있어야 한다는 의미이다. 따라서 두 개의 테이블에서 **공통으로 존재하는 데이터만** 출력시키는 `INNER JOIN`을 시키면 된다.  
+```sql
+FROM ANIMAL_INS INNER JOIN ANIMAL_OUTS
+ON ANIMAL_INS.ANIMAL_ID = ANIMAL_OUTS.ANIMAL_ID
+```
+문제에서 요구하는 것은 **보호 시작일보다 입양일이 더 빨라야(커야) 한다.** 만약 보호 시작일이 `2022년 03월 03일`이라면 입양일은 `2022년 01월 24`이어야 한다. **(입양일 < 보호시작일)**  
+```sql
+WHERE ANIMAL_OUTS.DATETIME < ANIMAL_INS.DATETIME
+```
+이대로 제출하면 **틀렸다고 나온다.**  
+**결과는 보호 시작일이 빠른 순**으로 조회해야 한다. 보호시작일을 오름차순 정렬 시키면 정답이다.
+```sql
+ORDER BY ANIMAL_INS.DATETIME
+```
 
 ---
 [문제 출처]  
