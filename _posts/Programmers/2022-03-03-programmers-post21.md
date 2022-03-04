@@ -63,12 +63,32 @@ Benji	2016-04-19 13:28:00
 ※ 입양을 가지 못한 동물이 3마리 이상인 경우만 입력으로 주어집니다.
 # 정답
 ```sql
-
+SELECT
+ANIMAL_INS.NAME,
+ANIMAL_INS.DATETIME
+FROM ANIMAL_INS LEFT OUTER JOIN ANIMAL_OUTS
+ON ANIMAL_INS.ANIMAL_ID = ANIMAL_OUTS.ANIMAL_ID
+WHERE ANIMAL_OUTS.ANIMAL_ID IS NULL
+ORDER BY ANIMAL_INS.DATETIME LIMIT 3
 ```
   
 # 설명
+문제에서 요구하는 것들을 확인하자.  
+1. **입양을 못간 동물 중 가장 오래 보호소에 있던 동물 조회**  
+2. **가장 오래 보호소에 있던 동물 3마리의 이름과 보호 시작일 조회**  
+3. **결과는 보호 시작일 순으로 조회**
+우선, 입양을 가지 못하였다는 것은 입양을 보낸 정보가 담겨있는 `ANIMAL_OUTS`에는 데이터가 존재하지 않는다는 의미이다. 따라서 `ANIMAL_INS`에는 존재하지만 `ANIMAL_OUTS`에는 존재하지 않는 데이터만 조회시키기 위하여 `LEFT JOIN`과 `ANIMAL_OUTS`이 존재하지 않는 데이터가 조회될 경우만 조회될 수 있도록 `ANIMAL_OUTS`가 `NULL`인 경우만 조회시킨다.  
 
-
+```sql
+FROM ANIMAL_INS LEFT OUTER JOIN ANIMAL_OUTS
+ON ANIMAL_INS.ANIMAL_ID = ANIMAL_OUTS.ANIMAL_ID
+WHERE ANIMAL_OUTS.ANIMAL_ID IS NULL
+```
+1번 조건은 충족하였지만 **가장 오래 보호소에 있었던 동물**을 조회하기 위하여 조인한 테이블 `ANIMAL_INS`에서 날짜를 **오름차순으로 정렬**시키면 가장 위에 있는 데이터들이 **가장 오래 보호소에 있었던 동물**들이다. 또한 문제에서 **3마리**만 조회시키라는 조건이 있기에 `LIMIT`를 사용하여 3마리만 조회시키면 정답이다.  
+  
+```sql
+ORDER BY ANIMAL_INS.DATETIME LIMIT 3
+```
 ---
 [문제 출처]  
 [프로그래머스](https://programmers.co.kr/)의 SQL 고득점 Kit  
