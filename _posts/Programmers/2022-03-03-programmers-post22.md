@@ -65,12 +65,37 @@ A410330	        Dog	            Chewy
 
 # 정답
 ```sql
-
+SELECT
+ANIMAL_OUTS.ANIMAL_ID,
+ANIMAL_OUTS.ANIMAL_TYPE,
+ANIMAL_OUTS.NAME
+FROM ANIMAL_INS INNER JOIN ANIMAL_OUTS
+ON ANIMAL_INS.ANIMAL_ID = ANIMAL_OUTS.ANIMAL_ID
+WHERE ANIMAL_INS.SEX_UPON_INTAKE LIKE 'Intact%' AND
+(ANIMAL_OUTS.SEX_UPON_OUTCOME LIKE 'Spayed%' OR ANIMAL_OUTS.SEX_UPON_OUTCOME LIKE 'Neutered%')
+ORDER BY ANIMAL_OUTS.ANIMAL_ID
 ```
-  
+***난이도가 또 급상승 하였다.. 푸느라 많이 힘들었다..***  
+
 # 설명
+문제에서 요구하는 것을 확인하자.  
+1. **보호소에 들어올 당시에는 중성화 되지 않았으며 보호소를 나갈 당시에는 중성화가 된** 동물의 데이터 조회  
+2. **조회하는 아이디 순으로 조회**  
+1번의 경우 보호소에 들어올 당시에는 중성화 되지 않았으며 보호소를 나갈 당시에는 중성화가 되었다는 것은 곧 테이블 `ANIMAL_INS`, `ANIMAL_OUTS`에는 데이터가 존재한다는 의미이다. 두 개의 테이블이 조인된 상태에서 **공통되는 데이터**만 조회할 수 있도록 `INNER JOIN`을 사용한다.  
+```sql
+FROM ANIMAL_INS INNER JOIN ANIMAL_OUTS
+ON ANIMAL_INS.ANIMAL_ID = ANIMAL_OUTS.ANIMAL_ID
+```
+중성화 되지 않았다는 것을 알기 위한 데이터는 `SEX_UPON_INTAKE`필드에 `Intact`라 표시되어 있고 중성화가 되었다는 것을 알기 위한 데이터는 `SEX_UPON_OUTCOME` 필드에 `Spayed` 혹은 `Neutered`으로 표시되어 있다. **보호소에 들어올 당시에는 중성화 되지 않았으며 보호소를 나갈 당시에는 중성화가 된** 데이터를 조회한다는 것은 곧 `ANIMAL_INS` 테이블의 `SEX_UPON_INTAKE` 필드에 존재하는 데이터가 `Intact`으로 시작하며 동시에 `ANIMAL_OUTS` 테이블의 `SEX_UPON_OUTCOME` 필드에 존재하는 데이터가 `Spayed`로 시작하거나 `Neutered`로 시작한다는 의미이다. 이를 위하여 **조건문과 LIKE 절을 사용하여 `Intact`, `Spayed`, `Neutered`로 시작하는 데이터가 존재할 경우만 조회시킨다.**  
 
-
+```sql
+WHERE ANIMAL_INS.SEX_UPON_INTAKE LIKE 'Intact%' AND
+(ANIMAL_OUTS.SEX_UPON_OUTCOME LIKE 'Spayed%' OR ANIMAL_OUTS.SEX_UPON_OUTCOME LIKE 'Neutered%')
+```
+여기서 제출하면 당연히 오답이 되고 **조회하는 아이디 순으로 조회**시켜야 하기 때문에 **ANIMAL_ID**를 오름차순 정렬시킨 뒤 제출하면 정답이다.  
+```sql
+ORDER BY ANIMAL_OUTS.ANIMAL_ID
+```
 ---
 [문제 출처]  
 [프로그래머스](https://programmers.co.kr/)의 SQL 고득점 Kit  
