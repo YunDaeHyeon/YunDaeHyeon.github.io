@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[Programmers, SQL 고득점 Kit] String, Date - 중성화 여부 파악하기"
-date:   2022-03-04 17:04:00+0900
+date:   2022-03-04 17:14:00+0900
 categories: jekyll update
 tags: [programmers level 2]
 ---

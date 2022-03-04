@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[Programmers, SQL 고득점 Kit] String, Date -  DATETIME에서 DATE로 형 변환"
-date:   2022-03-04 17:04:00+0900
+date:   2022-03-04 17:38:00+0900
 categories: jekyll update
 tags: [programmers level 2]
 ---
