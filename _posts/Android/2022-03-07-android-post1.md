@@ -30,7 +30,7 @@ tags: [Android]
 본래 통신 과정에서는 `HttpClient`나 `AsyncTask`를 이용하여 구현하였다. 하지만 `비동기` 처리 코드를 개발자가 직접적으로 구현해야하는 문제가 있어 모두 `Deprecated`되었다.. 그 대신 `Retrofit`을 사용하는 것이 쉽고 빠르고 편하기 때문에 사용한다.  
    
 ---
-[출처 및 참고]
+[출처 및 참고]  
 [REST란?](https://gmlwjd9405.github.io/2018/09/21/rest-and-restful.html)  
 [salix97](https://salix97.tistory.com/204)  
 [galid1](https://galid1.tistory.com/m/617)  
