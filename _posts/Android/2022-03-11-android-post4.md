@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[Android] RecyclerView의 OnBindViewHolder()에 대한 고찰"
-date:   2022-03-07 17:24:00+0900
+date:   2022-03-11 17:24:00+0900
 categories: jekyll update
 tags: [Android]
 ---
