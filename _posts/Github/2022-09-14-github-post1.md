@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[Git] 이미 push된 파일 .gitignore 적용하는 방법"
-date:   2022-09-14 22:13:00+0900
+date:   2022-09-14 0:25:00+0900
 categories: jekyll update
 tags: [Git]
 ---
